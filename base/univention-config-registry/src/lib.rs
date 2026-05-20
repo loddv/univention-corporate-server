@@ -54,25 +54,31 @@ impl ConfigRegistry {
     }
 
     pub fn iter_prefix(&self, prefix: &str) -> Vec<(String, String)> {
-        // UCR C lib has no iteration API; fall back to reading /etc/univention/base.conf
-        let mut results = Vec::new();
-        let content = match std::fs::read_to_string("/etc/univention/base.conf") {
-            Ok(c) => c,
+        let mut results: Vec<(String, String)> = Vec::new();
+        let prefix_cstr = match CString::new(prefix) {
+            Ok(s) => s,
             Err(_) => return results,
         };
-        for line in content.lines() {
-            let line = line.trim();
-            if line.starts_with('#') || line.is_empty() {
-                continue;
-            }
-            if let Some((k, v)) = line.split_once(':') {
-                let k = k.trim();
-                let v = v.trim();
-                if k.starts_with(prefix) {
-                    results.push((k.to_string(), v.to_string()));
-                }
-            }
+
+        unsafe extern "C" fn callback(
+            key: *const libc::c_char,
+            value: *const libc::c_char,
+            userdata: *mut libc::c_void,
+        ) {
+            let results = &mut *(userdata as *mut Vec<(String, String)>);
+            let k = std::ffi::CStr::from_ptr(key).to_string_lossy().into_owned();
+            let v = std::ffi::CStr::from_ptr(value).to_string_lossy().into_owned();
+            results.push((k, v));
         }
+
+        unsafe {
+            univention_config_iterate_prefix(
+                prefix_cstr.as_ptr(),
+                Some(callback),
+                &mut results as *mut _ as *mut libc::c_void,
+            );
+        }
+
         results
     }
 }
