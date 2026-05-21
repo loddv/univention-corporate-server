@@ -1,3 +1,15 @@
+univention-appcenter (12.0.1) unstable; urgency=medium
+
+  * Bug #59409: UCS 5.3-0 version bump
+
+ -- Florian Best <best@univention.de>  Thu, 23 Jul 2026 12:37:17 +0200
+
+univention-appcenter (11.6.2) UNRELEASED; urgency=medium
+
+  * Bug #59324: UCS 5.2-6 version bump
+
+ -- Marius Meschter <marius.meschter@univention.de>  Thu, 23 Jul 2026 12:37:17 +0200
+
 univention-appcenter (11.6.1) unstable; urgency=medium
 
   * Bug #59521: don't run UCR template filtering twice

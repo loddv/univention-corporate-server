@@ -1,3 +1,9 @@
+univention-management-console-module-ipchange (11.0.1) unstable; urgency=medium
+
+  * Bug #59409: UCS 5.3-0 version bump
+
+ -- Florian Best <best@univention.de>  Mon, 20 Jul 2026 12:54:23 +0200
+
 univention-management-console-module-ipchange (10.6.1) unstable; urgency=medium
 
   * Bug #55391: allow IPv6 addresses and support known records like
