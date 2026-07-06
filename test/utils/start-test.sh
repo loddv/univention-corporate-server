@@ -113,7 +113,7 @@ usage () {
 	echo "    <>${BOLD}OPENSTACK_IMAGE_NAME${NORM} - OS template name [${BOLD}$OPENSTACK_IMAGE_NAME${NORM}]"
 	echo ""
 	echo "  ucs-*-create"
-	echo "    <>${BOLD}KVM_BUILD_SERVER${NORM}     - KVM build server|'EC2'|'OpenStack'|'Openstack'|'OS' [${BOLD}$KVM_BUILD_SERVER${NORM}]"
+	echo "    <>${BOLD}KVM_BUILD_SERVER${NORM}     - KVM build server|'EC2'|'OpenStack'|'Openstack'|'OS'|'Proxmox' [${BOLD}$KVM_BUILD_SERVER${NORM}]"
 	echo "                             Overwritten by '*build_server:' from '.cfg'!"
 	echo "    <>${BOLD}EXACT_MATCH${NORM}          - do --exact-match to exactly match template names [${BOLD}$EXACT_MATCH${NORM}]"
 	echo "    <>${BOLD}SHUTDOWN${NORM}             - --shutdown VM after run [${BOLD}$SHUTDOWN${NORM}]"
@@ -231,6 +231,14 @@ openstack_cfg () {
 	die "Missing clouds.yaml file for OS access!"
 }
 
+proxmox_cfg () {
+	for pve_cfg in ${UCS_EC2_TOOLS_JSON:+"$UCS_EC2_TOOLS_JSON"} "${HOME}/.ucs-ec2-tools.json"
+	do
+		[ -r "$pve_cfg" ] && return
+	done
+	die "Missing ~/.ucs-ec2-tools.json file for Proxmox access!"
+}
+
 
 # build server can be overwritten per cfg file `build_server`
 build_server="$(awk -F ": " '/^\w*build_server:/{print $2}' "$CFG")"
@@ -249,6 +257,10 @@ EC2)
 Openstack|OpenStack|OS)
 	openstack_cfg
 	exe="ucs-openstack-create"
+	;;
+Proxmox|PROXMOX|PVE)
+	proxmox_cfg
+	exe="ucs-proxmox-create"
 	;;
 KVM|*)
 	exe="ucs-kvm-create"
@@ -301,6 +313,7 @@ then
 		)
 	fi
 	cmd+=(${os_cfg:+-v "$os_cfg:/etc/openstack/clouds.yml:ro"})
+	cmd+=(${pve_cfg:+-v "$pve_cfg:$HOME/.ucs-ec2-tools.json:ro"})
 	# interactive mode for debug
 	$DEBUG && cmd+=("-it")
 	# the image to start
