@@ -8,6 +8,29 @@ from urllib.error import URLError
 
 from univention.config_registry.interfaces import Interfaces
 
+
+APLHA = '''
+########################################################################
+
+                   !!! UCS 5.3 ALPHA RELEASE !!!
+
+This is an early Alpha version of Univention Corporate Server (UCS) 5.3.
+
+This release is intended exclusively for evaluation and early testing.
+
+IMPORTANT:
+ - Do NOT use this system in production.
+ - There is NO supported upgrade path from this Alpha release to the
+   final production release. Reinstallation will be required.
+ - This system uses UCS testing Debian repositories. Package updates may
+   temporarily or permanently render the system unusable.
+ - Upgrading this system is discouraged.
+ - No support is provided for Alpha installations.
+
+########################################################################
+'''
+
+
 msg_amazon = '''
 ########################################################################
 
@@ -120,6 +143,7 @@ if not url_list:
             url_list.append('https://[%s]/' % (addr.ip,))
 
 msg = msg_amazon if configRegistry.is_true('server/amazon') else msg_di_uss
+print(APLHA)
 print(msg % {
     'url_list': '\n  '.join(url_list),
 })
