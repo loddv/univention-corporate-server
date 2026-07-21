@@ -781,7 +781,200 @@ msgstr ""
 "Es muss sichergestellt sein, dass die Benutzer eines Teams in Azure eine "
 "Lizenz erhalten, in der die Nutzung von Teams enthalten ist."
 
-#: ../../idm-cloud/office-365.rst:238
+#: ../../idm-cloud/office-365.rst:237
+msgid "Education Classes"
+msgstr "Bildungsklassen"
+
+#: ../../idm-cloud/office-365.rst:240
+msgid ""
+"The :program:`Microsoft 365 Connector` supports provisioning education "
+"classes via the `Microsoft Graph Education Roster API "
+"<https://learn.microsoft.com/en-us/graph/api/resources/educationclass>`_. "
+"An education class is a special group type that represents a class in a "
+"school environment, with associated teachers (owners), students (members), "
+"and academic metadata such as class code, grade level, and term information."
+msgstr ""
+"Der :program:`Microsoft 365 Connector` unterstützt die Bereitstellung von "
+"Bildungsklassen über die `Microsoft Graph Education Roster API "
+"<https://learn.microsoft.com/en-us/graph/api/resources/educationclass>`_. "
+"Eine Bildungsklasse ist ein spezieller Gruppentyp, der eine Klasse in einer "
+"Schulumgebung repräsentiert, mit zugehörigen Lehrern (Besitzern), Schülern "
+"(Mitgliedern) und akademischen Metadaten wie Klassencode, Klassenstufe und "
+"Semesterinformationen."
+
+#: ../../idm-cloud/office-365.rst:249
+msgid "To use education classes, the following prerequisites must be met:"
+msgstr ""
+"Für die Nutzung von Bildungsklassen müssen die folgenden Voraussetzungen "
+"erfüllt sein:"
+
+#: ../../idm-cloud/office-365.rst:251
+msgid ""
+"An **Azure Education License** (A1, A3, or A5) must be assigned to the "
+"Microsoft 365 tenant. The Education Roster API is not available without an "
+"education license."
+msgstr ""
+"Dem Microsoft 365-Mandanten muss eine **Azure Education-Lizenz** (A1, A3 "
+"oder A5) zugewiesen sein. Die Education Roster API ist ohne eine Education-"
+"Lizenz nicht verfügbar."
+
+#: ../../idm-cloud/office-365.rst:255
+msgid ""
+"`School Data Sync <microsoft-sds-setup_>`_ (SDS) must be installed and "
+"configured in the Microsoft 365 tenant. SDS processes the education roster "
+"data and makes it available through the Education Roster API."
+msgstr ""
+"`School Data Sync <microsoft-sds-setup_>`_ (SDS) muss im Microsoft 365-"
+"Mandanten installiert und konfiguriert sein. SDS verarbeitet die "
+"Bildungsrosterdaten und stellt sie über die Education Roster API zur "
+"Verfügung."
+
+#: ../../idm-cloud/office-365.rst:260
+msgid ""
+"The ``EduRoster.ReadWrite.All`` application permission must be added to the "
+"Azure AD application used by the Microsoft 365 Connector."
+msgstr ""
+"Die ``EduRoster.ReadWrite.All``-Anwendungsberechtigung muss der vom "
+"Microsoft 365 Connector verwendeten Azure AD-Anwendung hinzugefügt werden."
+
+#: ../../idm-cloud/office-365.rst:263
+msgid ""
+"The education feature must be enabled in the |UCSUCRV| "
+":envvar:`office365/education/enabled` to ``yes``. By default, the education "
+"class group type and its attributes are hidden in the UMC."
+msgstr ""
+"Die Bildungsklassenfunktion muss über die |UCSUCRV| "
+":envvar:`office365/education/enabled` auf ``yes`` gesetzt werden. "
+"Standardmäßig sind der Bildungsklassen-Gruppentyp und seine Attribute im "
+"UMC ausgeblendet."
+
+#: ../../idm-cloud/office-365.rst:270
+msgid "Enabling the education feature"
+msgstr "Aktivieren der Bildungsklassenfunktion"
+
+#: ../../idm-cloud/office-365.rst:273
+msgid ""
+"The ``Education Class`` group type and its associated attributes (class "
+"code, grade, term) are hidden in the UMC by default. To make them visible, "
+"enable the education feature through the App Settings of the :program:"
+"`Microsoft 365 Connector` in the App Center, or by setting the |UCSUCRV| "
+":envvar:`office365/education/enabled` to ``yes``:"
+msgstr ""
+"Der ``Education Class``-Gruppentyp und die zugehörigen Attribute "
+"(Klassencode, Klassenstufe, Semester) sind im UMC standardmäßig "
+"ausgeblendet. Um sie sichtbar zu machen, aktivieren Sie die "
+"Bildungsklassenfunktion in den App-Einstellungen des :program:`Microsoft "
+"365 Connector` im App Center oder setzen Sie die |UCSUCRV| "
+":envvar:`office365/education/enabled` auf ``yes``:"
+
+#: ../../idm-cloud/office-365.rst:283
+msgid ""
+"After enabling the feature, restart the |UCSUMC| for the changes to take "
+"effect."
+msgstr ""
+"Nach der Aktivierung der Funktion starten Sie die |UCSUMC| neu, damit die "
+"Änderungen wirksam werden."
+
+#: ../../idm-cloud/office-365.rst:285
+msgid ""
+"To create an education class, enable group synchronization with the "
+"|UCSUCRV| :envvar:`office365/groups/sync` set to ``yes`` and restart the "
+"|UCSUDL|. Then create a UDM group of type ``Education Class`` on the "
+"*Microsoft 365* tab."
+msgstr ""
+"Um eine Bildungsklasse zu erstellen, aktivieren Sie die "
+"Gruppensynchronisation mit der |UCSUCRV| "
+":envvar:`office365/groups/sync` auf ``yes`` und starten Sie den |UCSUDL| "
+"neu. Erstellen Sie dann eine UDM-Gruppe vom Typ ``Education Class`` auf "
+"dem Reiter *Microsoft 365*."
+
+#: ../../idm-cloud/office-365.rst:289
+msgid ""
+"An education class group requires at least one owner, which represents the "
+"teacher of the class. The owner must be a Microsoft 365 enabled user."
+msgstr ""
+"Eine Bildungsklassengruppe benötigt mindestens einen Besitzer, der den "
+"Lehrer der Klasse repräsentiert. Der Besitzer muss ein für Microsoft 365 "
+"aktivierter Benutzer sein."
+
+#: ../../idm-cloud/office-365.rst:292
+msgid ""
+"The following education-specific attributes can be configured on the "
+"*Microsoft 365* tab of a group object:"
+msgstr ""
+"Die folgenden bildungsspezifischen Attribute können auf dem Reiter "
+"*Microsoft 365* eines Gruppenobjekts konfiguriert werden:"
+
+#: ../../idm-cloud/office-365.rst:295
+msgid ":``Class Code``: An identifier for the class (e.g. ``CS101``)."
+msgstr ":``Class Code``: Ein Bezeichner für die Klasse (z.B. ``CS101``)."
+
+#: ../../idm-cloud/office-365.rst:296
+msgid ":``Grade``: The grade level of the class (e.g. ``Grade 10``)."
+msgstr ":``Grade``: Die Klassenstufe (z.B. ``Klasse 10``)."
+
+#: ../../idm-cloud/office-365.rst:297
+msgid ""
+":``Term Display Name``: A human-readable name for the academic term (e.g. "
+"``Fall 2026``)."
+msgstr ""
+":``Term Display Name``: Ein lesbarer Name für das akademische Semester "
+"(z.B. ``Herbst 2026``)."
+
+#: ../../idm-cloud/office-365.rst:299
+msgid ":``Term External ID``: An external identifier for the term."
+msgstr ":``Term External ID``: Eine externe Kennung für das Semester."
+
+#: ../../idm-cloud/office-365.rst:300
+msgid ""
+":``Term Start Date``: The start date of the academic term "
+"(``YYYY-MM-DD``)."
+msgstr ""
+":``Term Start Date``: Das Startdatum des akademischen Semesters "
+"(``YYYY-MM-DD``)."
+
+#: ../../idm-cloud/office-365.rst:301
+msgid ""
+":``Term End Date``: The end date of the academic term (``YYYY-MM-DD``)."
+msgstr ""
+":``Term End Date``: Das Enddatum des akademischen Semesters "
+"(``YYYY-MM-DD``)."
+
+#: ../../idm-cloud/office-365.rst:305
+msgid ""
+"The ``HiddenMembership`` visibility option is only available for education "
+"class groups. It is not permitted for ``Security Group`` or ``Microsoft 365 "
+"Group`` types."
+msgstr ""
+"Die Sichtbarkeitsoption ``HiddenMembership`` ist nur für "
+"Bildungsklassengruppen verfügbar. Sie ist für ``Security Group``- oder "
+"``Microsoft 365 Group``-Typen nicht zulässig."
+
+#: ../../idm-cloud/office-365.rst:309
+msgid ""
+"When an education class group is created, the connector first provisions "
+"the education class via the Education Roster API. If the Education Roster "
+"API call fails (for example, because the tenant does not have an education "
+"license or the required permissions are missing), the connector falls back "
+"to creating a regular Microsoft 365 group instead."
+msgstr ""
+"Wenn eine Bildungsklassengruppe erstellt wird, stellt der Connector die "
+"Bildungsklasse zunächst über die Education Roster API bereit. Schlägt der "
+"Aufruf der Education Roster API fehl (z.B. weil der Mandant keine "
+"Education-Lizenz besitzt oder die erforderlichen Berechtigungen fehlen), "
+"erstellt der Connector stattdessen eine reguläre Microsoft 365-Gruppe."
+
+#: ../../idm-cloud/office-365.rst:317
+msgid ""
+"Education class attributes can only be used with the ``Education Class`` "
+"group type. A UDM hook prevents setting education attributes on other group "
+"types."
+msgstr ""
+"Bildungsklassenattribute können nur mit dem ``Education Class``-Gruppentyp "
+"verwendet werden. Ein UDM-Hook verhindert das Setzen von Bildungsattributen "
+"für andere Gruppentypen."
+
+#: ../../idm-cloud/office-365.rst:323
 msgid "Synchronization of Users in multiple Azure Active Directories"
 msgstr "Synchronisation von Benutzern in mehrere Azure Active Directories"
 
