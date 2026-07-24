@@ -1492,7 +1492,7 @@ configure_umc_postgres () {
 	su postgres -c "/usr/bin/createuser umc"
 	su postgres -c "psql umc -c \"ALTER ROLE umc WITH ENCRYPTED PASSWORD 'univention'\""
 	su postgres -c "psql umc -c \"GRANT ALL ON SCHEMA public TO umc\""
-	ucr set postgres15/pg_hba/config/host="umc umc 0.0.0.0/0 md5"
+	ucr set postgres17/pg_hba/config/host=umc umc 0.0.0.0/0 md5
 	service postgresql restart
 	fqdn="$(ucr get hostname).$(ucr get domainname)"
 	univention-management-console-settings set -u "postgresql+psycopg2://umc:univention@$fqdn:5432/umc"
