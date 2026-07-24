@@ -130,7 +130,7 @@ class PostgresListener:
             connection = conn
 
         cls.verify_postgres(connection.engine)
-        connection.execution_options(isolation_level="AUTOCOMMIT").execute(text("NOTIFY logout, :session_id;").bindparams(session_id=session_id))
+        connection.execute(text("NOTIFY logout, :session_id;").bindparams(session_id=session_id))
 
 
 @contextmanager
