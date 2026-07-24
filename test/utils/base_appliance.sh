@@ -853,7 +853,7 @@ ConditionPathExists=!/var/lib/resize2fs.done
 
 [Service]
 Type=oneshot
-ExecStart=/usr/sbin/resize2fs /dev/xvda1
+ExecStart=/bin/sh -c 'exec /usr/sbin/resize2fs "$(findmnt -nvo SOURCE /)"'
 ExecStartPost=/usr/bin/touch /var/lib/resize2fs.done
 
 [Install]
